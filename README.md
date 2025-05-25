@@ -1,2 +1,2 @@
 # stormwater_monitoring_exploration
-Trying out extractions from field data form images.
+Trying out extractions from field data form images for [Cascade STEAM](https://cascadesteam.org) Citizen Science group, for [RE Sources](https://www.re-sources.org) stormwater management project.
