@@ -1,0 +1,515 @@
+{
+    "dev_notes": [
+        "For pre-DB validation, will need to consult target DB for nullability and other constraints (uniqueness, character limits, etc.).",
+        "Should decide whether and how to differentiate null types, like empty fields vs. user-entered nulls (e.g., 'N/A', 'none', null sign), vs. 0.",
+        "See also note fields in metadata section, like for the weather field."
+    ],
+    "forms": {
+        "str": {
+            "city": "str",
+            "date": "str",
+            "investigators": [
+                {
+                    "name": "str",
+                    "start_time": "str",
+                    "end_time": "str"
+                }
+            ],
+            "notes": "str",
+            "observations": {
+                "field": {
+                    "tide_height": "float",
+                    "tide_time": "str",
+                    "past_24hr_rainfall": "float",
+                    "weather": "str"
+                },
+                "site": [
+                    {
+                        "site_id": "str",
+                        "dry_outfall": "bool",
+                        "arrival_time": "str",
+                        "flow": "str",
+                        "flow_compared_to_expected": "str",
+                        "air_temp": "float",
+                        "water_temp": "float",
+                        "DO_mg_per_l": "float",
+                        "SPS micro_S_per_cm": "float",
+                        "salinity_ppt": "float",
+                        "pH": "float",
+                        "color": {
+                            "rank": "int",
+                            "description": "str"
+                        },
+                        "odor": {
+                            "rank": "int",
+                            "description": "str"
+                        },
+                        "visual": {
+                            "rank": "int",
+                            "description": "str"
+                        },
+                        "bacteria_bottle_no": "str"
+                    }
+                ]
+            }
+        }
+    },
+    "metadata": {
+        "date": {
+            "format": "YYYY-MM-DD"
+        },
+        "form_id": {
+            "note": "Different than DB's form ID, and won't likely be entered into DB, and is not found on the forms themselves. Just for convenience and to avoid trouble with accidentally sorted lists. Maybe use image filename."
+        },
+        "investigators": {
+            "end_time": {
+                "format": "HH:MM"
+            },
+            "start_time": {
+                "format": "HH:MM"
+            }
+        },
+        "observations": {
+            "field": {
+                "past_24hr_rainfall": {
+                    "units": "inches"
+                },
+                "tide_height": {
+                    "units": "feet"
+                },
+                "tide_time": {
+                    "format": "HH:MM"
+                },
+                "weather": {
+                    "options": [
+                        "cloud_clear",
+                        "cloud_part",
+                        "cloud_over",
+                        "precip_rain_light",
+                        "precip_rain_mod",
+                        "precip_rain_heavy",
+                        "precip_snow"
+                    ],
+                    "notes": [
+                        "Took a liberty to create our own str values for optional rankings, clarity. But, likely need to convert to DB values.",
+                        "It's unclear at this time if they can only select one. But, common-sense says cloud-cover and precipitation levels are not mutually exclusive. If there can be multiple weather conditions, this will need to be a list of StrEnums (to be validated as a set outside of JSON, along with other validations, like no two-rain observations)."
+                    ]
+                }
+            },
+            "site": {
+                "air_temp": {
+                    "units": "celsius"
+                },
+                "arrival_time": {
+                    "format": "HH:MM"
+                },
+                "color": {
+                    "rank": {
+                        "options": [0, 1, 2, 3]
+                    },
+                    "thresholds": {
+                        "outfall": "Any non-natural phenomena.",
+                        "creek": "Any non-natural phenomena."
+                    }
+                },
+                "DO_mg_per_l": {
+                    "units": "mg/l",
+                    "thresholds": {
+                        "outfall": "< 6 mg/l",
+                        "creek": "< 10.0 mg/l"
+                    }
+                },
+                "flow": {
+                    "options": ["T", "M", "H"]
+                },
+                "flow_compared_to_expected": {
+                    "options": ["lower", "normal", "higher"]
+                },
+                "odor": {
+                    "rank": {
+                        "options": [0, 1, 2, 3]
+                    },
+                    "thresholds": {
+                        "outfall": "Any non-natural phenomena.",
+                        "creek": "Any non-natural phenomena."
+                    }
+                },
+                "pH": {
+                    "units": "pH",
+                    "thresholds": {
+                        "outfall": "< 5 or > 9",
+                        "creek": "< 6.5 or > 8.5"
+                    }
+                },
+                "salinity_ppt": {
+                    "units": "ppt"
+                },
+                "SPS micro_S_per_cm": {
+                    "units": "microS/cm",
+                    "thresholds": {
+                        "outfall": "> 500 microS/cm",
+                        "creek": "> 500 microS/cm"
+                    }
+                },
+                "visual": {
+                    "rank": {
+                        "options": [0, 1, 2, 3]
+                    },
+                    "thresholds": {
+                        "outfall": "Any non-natural phenomena.",
+                        "creek": "Any non-natural phenomena."
+                    }
+                },
+                "water_temp": {
+                    "units": "celsius",
+                    "thresholds": {
+                        "outfall": "> air_temp",
+                        "creek": {
+                            "habitat": "> 16 C",
+                            "spawn": "> 17.5 C",
+                            "rear": "> 17.5 C",
+                            "migrate": "> 17.5 C"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "example_document": {
+        "metadata":{
+            "date": {
+                "format": "YYYY-MM-DD"
+            },
+            "form_id": "str",
+            "investigators": {
+                "end_time": {
+                    "format": "HH:MM"
+                },
+                "start_time": {
+                    "format": "HH:MM"
+                }
+            },
+            "observations": {
+                "field": {
+                    "past_24hr_rainfall": {
+                        "units": "inches"
+                    },
+                    "tide_height": {
+                        "units": "feet"
+                    },
+                    "tide_time": {
+                        "format": "HH:MM"
+                    },
+                    "weather": {
+                        "options": [
+                            "cloud_clear",
+                            "cloud_part",
+                            "cloud_over",
+                            "precip_rain_light",
+                            "precip_rain_mod",
+                            "precip_rain_heavy",
+                            "precip_snow"
+                        ]
+                    }
+                },
+                "site": {
+                    "air_temp": {
+                        "units": "celsius"
+                    },
+                    "arrival_time": {
+                        "format": "HH:MM"
+                    },
+                    "color": {
+                        "rank": {
+                            "options": [0, 1, 2, 3]
+                        },
+                        "thresholds": {
+                            "outfall": "Any non-natural phenomena.",
+                            "creek": "Any non-natural phenomena."
+                        }
+                    },
+                    "DO_mg_per_l": {
+                        "units": "mg/l",
+                        "thresholds": {
+                            "outfall": "< 6 mg/l",
+                            "creek": "< 10.0 mg/l"
+                        }
+                    },
+                    "flow": {
+                        "options": ["T", "M", "H"]
+                    },
+                    "flow_compared_to_expected": {
+                        "options": ["lower", "normal", "higher"]
+                    },
+                    "odor": {
+                        "rank": {
+                            "options": [0, 1, 2, 3]
+                        },
+                        "thresholds": {
+                            "outfall": "Any non-natural phenomena.",
+                            "creek": "Any non-natural phenomena."
+                        }
+                    },
+                    "pH": {
+                        "units": "pH",
+                        "thresholds": {
+                            "outfall": "< 5 or > 9",
+                            "creek": "< 6.5 or > 8.5"
+                        }
+                    },
+                    "salinity_ppt": {
+                        "units": "ppt"
+                    },
+                    "SPS micro_S_per_cm": {
+                        "units": "microS/cm",
+                        "thresholds": {
+                            "outfall": "> 500 microS/cm",
+                            "creek": "> 500 microS/cm"
+                        }
+                    },
+                    "visual": {
+                        "rank": {
+                            "options": [0, 1, 2, 3]
+                        },
+                        "thresholds": {
+                            "outfall": "Any non-natural phenomena.",
+                            "creek": "Any non-natural phenomena."
+                        }
+                    },
+                    "water_temp": {
+                        "units": "celsius",
+                        "thresholds": {
+                            "outfall": "> air_temp",
+                            "creek": {
+                                "habitat": "> 16 C",
+                                "spawn": "> 17.5 C",
+                                "rear": "> 17.5 C",
+                                "migrate": "> 17.5 C"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "forms": {
+            "IMG_9527.jpg": {
+                "city": "BELLINGHAM",
+                "date": "2025-04-17",
+                "investigators": [
+                    {
+                        "name": "CIARA H",
+                        "start_time": "14:40",
+                        "end_time": "15:23"
+                    },
+                    {
+                        "name": "ANNA B",
+                        "start_time": "14:40",
+                        "end_time": "15:23"
+                    },
+                    {
+                        "name": "ZOE F",
+                        "start_time": "15:09",
+                        "end_time": "15:23"
+                    }
+                ],
+                "notes": "C ST: MICROBIAL MAT RETREATED ...",
+                "observations": {
+                    "field": {
+                        "tide_height": -0.7,
+                        "tide_time": "14:39",
+                        "past_24hr_rainfall": 0.0,
+                        "weather": "cloud_clear"
+                    },
+                    "site": [
+                        {
+                            "site_id": "C ST",
+                            "dry_outfall": false,
+                            "arrival_time": "14:41",
+                            "flow": "M",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": 21.0,
+                            "water_temp": 11.6,
+                            "DO_mg_per_l": 10.35,
+                            "SPS micro_S_per_cm": 414.1,
+                            "salinity_ppt": 0.2,
+                            "pH": 5.91,
+                            "color": {
+                                "rank": 1,
+                                "description": "YELLOW"
+                            },
+                            "odor": {
+                                "rank": "1",
+                                "description": "SULPHUR"
+                            },
+                            "visual": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B1"
+                        },
+                        {
+                            "site_id": "C ST",
+                            "dry_outfall": false,
+                            "arrival_time": "14:41",
+                            "flow": "M",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": 21.0,
+                            "water_temp": 11.2,
+                            "DO_mg_per_l": 10.41,
+                            "SPS micro_S_per_cm": 369.9,
+                            "salinity_ppt": 0.18,
+                            "pH": 5.5,
+                            "color": {
+                                "rank": 1,
+                                "description": "YELLOW"
+                            },
+                            "odor": {
+                                "rank": "1",
+                                "description": "SULPHUR"
+                            },
+                            "visual": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B2"
+                        },
+                        {
+                            "site_id": "BROADWAY",
+                            "dry_outfall": false,
+                            "arrival_time": "15:09",
+                            "flow": "M",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": 22.0,
+                            "water_temp": 11.1,
+                            "DO_mg_per_l": 10.73,
+                            "SPS micro_S_per_cm": 314.1,
+                            "salinity_ppt": 0.15,
+                            "pH": 7.40,
+                            "color": {
+                                "rank": 1,
+                                "description": "YELLOW"
+                            },
+                            "odor": {
+                                "rank": "1",
+                                "description": "SULPHUR"
+                            },
+                            "visual": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B3"
+                        }
+                    ]
+                }
+            },
+            "sheet1.jpg": {
+                "city": "BELLINGHAM",
+                "date": "2025-04-21",
+                "investigators": [
+                    {
+                        "name": "ANNA",
+                        "start_time": "17:10"
+                    },
+                    {
+                        "name": "PAT",
+                        "start_time": "17:10"
+                    },
+                    {
+                        "name": "CHRIS",
+                        "start_time": "17:10"
+                    }
+                ],
+                "notes": "Padden - DO%",
+                "observations": {
+                    "field": {
+                        "tide_height": 0.22,
+                        "tide_time": "17:10",
+                        "past_24hr_rainfall": null,
+                        "weather": "cloud_clear"
+                    },
+                    "site": [
+                        {
+                            "site_id": "PADDEN",
+                            "dry_outfall": false,
+                            "arrival_time": "17:10",
+                            "flow": "H",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": 16,
+                            "water_temp": 11.6,
+                            "DO_mg_per_l": 102.1,
+                            "SPS micro_S_per_cm": 151.0,
+                            "salinity_ppt": 0.07,
+                            "pH": 7.73,
+                            "color": {
+                                "rank": 1,
+                                "description": "TAN"
+                            },
+                            "odor": {
+                                "rank": "0",
+                                "description": null
+                            },
+                            "visual": {
+                                "rank": 0,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B5"
+                        },
+                        {
+                            "site_id": "BENASFASDF",
+                            "dry_outfall": false,
+                            "arrival_time": "17:33",
+                            "flow": "H",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": 18,
+                            "water_temp": 11.4,
+                            "DO_mg_per_l": 11.03,
+                            "SPS micro_S_per_cm": 234.7,
+                            "salinity_ppt": 0.11,
+                            "pH": 7.87,
+                            "color": {
+                                "rank": 1,
+                                "description": "Tan/brown"
+                            },
+                            "odor": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "visual": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B6"
+                        },
+                        {
+                            "site_id": "BEPSODF72",
+                            "dry_outfall": false,
+                            "arrival_time": "17:40",
+                            "flow": "H",
+                            "flow_compared_to_expected": "normal",
+                            "air_temp": null,
+                            "water_temp": 11.4,
+                            "DO_mg_per_l": 11.17,
+                            "SPS micro_S_per_cm": 235.1,
+                            "salinity_ppt": 0.11,
+                            "pH": 7.82,
+                            "color": {
+                                "rank": 1,
+                                "description": "Brown"
+                            },
+                            "odor": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "visual": {
+                                "rank": null,
+                                "description": null
+                            },
+                            "bacteria_bottle_no": "B7"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
