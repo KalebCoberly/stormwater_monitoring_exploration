@@ -8,13 +8,12 @@
         "str": {
             "city": "str",
             "date": "str",
-            "investigators": [
-                {
-                    "name": "str",
+            "investigators": {
+                "name": {
                     "start_time": "str",
                     "end_time": "str"
                 }
-            ],
+            },
             "notes": "str",
             "observations": {
                 "field": {
@@ -62,6 +61,7 @@
             "note": "Different than DB's form ID, and won't likely be entered into DB, and is not found on the forms themselves. Just for convenience and to avoid trouble with accidentally sorted lists. Maybe use image filename."
         },
         "investigators": {
+            "name": "str",
             "end_time": {
                 "format": "HH:MM"
             },
@@ -183,6 +183,7 @@
             },
             "form_id": "str",
             "investigators": {
+                "name": "str",
                 "end_time": {
                     "format": "HH:MM"
                 },
@@ -296,23 +297,20 @@
             "IMG_9527.jpg": {
                 "city": "BELLINGHAM",
                 "date": "2025-04-17",
-                "investigators": [
-                    {
-                        "name": "CIARA H",
+                "investigators": {
+                    "CIARA H": {
                         "start_time": "14:40",
                         "end_time": "15:23"
                     },
-                    {
-                        "name": "ANNA B",
+                    "ANNA B": {
                         "start_time": "14:40",
                         "end_time": "15:23"
                     },
-                    {
-                        "name": "ZOE F",
+                    "ZOE F": {
                         "start_time": "15:09",
                         "end_time": "15:23"
                     }
-                ],
+                },
                 "notes": "C ST: MICROBIAL MAT RETREATED ...",
                 "observations": {
                     "field": {
@@ -406,20 +404,17 @@
             "sheet1.jpg": {
                 "city": "BELLINGHAM",
                 "date": "2025-04-21",
-                "investigators": [
-                    {
-                        "name": "ANNA",
+                "investigators": {
+                    "ANNA": {
                         "start_time": "17:10"
                     },
-                    {
-                        "name": "PAT",
+                    "PAT": {
                         "start_time": "17:10"
                     },
-                    {
-                        "name": "CHRIS",
+                    "CHRIS": {
                         "start_time": "17:10"
                     }
-                ],
+                },
                 "notes": "Padden - DO%",
                 "observations": {
                     "field": {
