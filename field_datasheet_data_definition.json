@@ -477,7 +477,7 @@
                                 "description": "YELLOW"
                             },
                             "odor": {
-                                "rank": "1",
+                                "rank": 1,
                                 "description": "SULPHUR"
                             },
                             "visual": {
@@ -503,7 +503,7 @@
                                 "description": "YELLOW"
                             },
                             "odor": {
-                                "rank": "1",
+                                "rank": 1,
                                 "description": "SULPHUR"
                             },
                             "visual": {
@@ -529,7 +529,7 @@
                                 "description": "YELLOW"
                             },
                             "odor": {
-                                "rank": "1",
+                                "rank": 1,
                                 "description": "SULPHUR"
                             },
                             "visual": {
@@ -582,7 +582,7 @@
                                 "description": "TAN"
                             },
                             "odor": {
-                                "rank": "0",
+                                "rank": 0,
                                 "description": null
                             },
                             "visual": {
