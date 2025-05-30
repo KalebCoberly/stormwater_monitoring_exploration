@@ -105,7 +105,7 @@
             },
             "site": {
                 "air_temp": {
-                    "units": "celsius"
+                    "units": "Celsius"
                 },
                 "arrival_time": {
                     "format": "HH:MM"
@@ -206,7 +206,7 @@
                     }
                 },
                 "water_temp": {
-                    "units": "celsius",
+                    "units": "Celsius",
                     "thresholds": {
                         "outfall": {
                             "upper": {
@@ -292,7 +292,7 @@
                 },
                 "site": {
                     "air_temp": {
-                        "units": "celsius"
+                        "units": "Celsius"
                     },
                     "arrival_time": {
                         "format": "HH:MM"
@@ -393,7 +393,7 @@
                         }
                     },
                     "water_temp": {
-                        "units": "celsius",
+                        "units": "Celsius",
                         "thresholds": {
                             "outfall": {
                                 "upper": {
