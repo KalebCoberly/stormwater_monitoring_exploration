@@ -2,7 +2,7 @@
     "dev_notes": [
         "For pre-DB validation, will need to consult target DB for nullability and other constraints (uniqueness, character limits, etc.).",
         "Should decide whether and how to differentiate null types, like empty fields vs. user-entered nulls (e.g., 'N/A', 'none', null sign), vs. 0.",
-        "See also note fields in metadata section, like for the weather field."
+        "See also dev_notes/notes fields in metadata section, like for the weather field."
     ],
     "forms": {
         "str": {
@@ -90,7 +90,7 @@
                         "precip_rain_heavy",
                         "precip_snow"
                     ],
-                    "notes": [
+                    "dev_notes": [
                         "Took a liberty to create our own str values for optional rankings, clarity. But, likely need to convert to DB values.",
                         "It's unclear at this time if they can only select one. But, common-sense says cloud-cover and precipitation levels are not mutually exclusive. If there can be multiple weather conditions, this will need to be a list of StrEnums (to be validated as a set outside of JSON, along with other validations, like no two-rain observations)."
                     ]
@@ -115,8 +115,18 @@
                 "DO_mg_per_l": {
                     "units": "mg/l",
                     "thresholds": {
-                        "outfall": "< 6 mg/l",
-                        "creek": "< 10.0 mg/l"
+                        "outfall": {
+                            "lower": {
+                                "value": 6,
+                                "inclusive": true
+                            }
+                        },
+                        "creek": {
+                            "lower": {
+                                "value": 10,
+                                "inclusive": true
+                            }
+                        }
                     }
                 },
                 "flow": {
@@ -137,8 +147,26 @@
                 "pH": {
                     "units": "pH",
                     "thresholds": {
-                        "outfall": "< 5 or > 9",
-                        "creek": "< 6.5 or > 8.5"
+                        "outfall": {
+                            "lower": {
+                                "value": 5,
+                                "inclusive": true
+                            },
+                            "upper": {
+                                "value": 9,
+                                "inclusive": true
+                            }
+                        },
+                        "creek": {
+                            "lower": {
+                                "value": 6.5,
+                                "inclusive": true
+                            },
+                            "upper": {
+                                "value": 8.5,
+                                "inclusive": true
+                            }
+                        }
                     }
                 },
                 "salinity_ppt": {
@@ -147,8 +175,18 @@
                 "SPS micro_S_per_cm": {
                     "units": "microS/cm",
                     "thresholds": {
-                        "outfall": "> 500 microS/cm",
-                        "creek": "> 500 microS/cm"
+                        "outfall": {
+                            "upper": {
+                                "value": 500,
+                                "inclusive": true
+                            }
+                        },
+                        "creek": {
+                            "upper": {
+                                "value": 500,
+                                "inclusive": true
+                            }
+                        }
                     }
                 },
                 "visual": {
@@ -163,12 +201,37 @@
                 "water_temp": {
                     "units": "celsius",
                     "thresholds": {
-                        "outfall": "> air_temp",
+                        "outfall": {
+                            "upper": {
+                                "reference_value": "air_temp",
+                                "inclusive": true
+                            }
+                        },
                         "creek": {
-                            "habitat": "> 16 C",
-                            "spawn": "> 17.5 C",
-                            "rear": "> 17.5 C",
-                            "migrate": "> 17.5 C"
+                            "habitat": {
+                                "upper": {
+                                    "value": 16,
+                                    "inclusive": true
+                                }
+                            },
+                            "spawn": {
+                                "upper": {
+                                    "value": 17.5,
+                                    "inclusive": true
+                                }
+                            },
+                            "rear": {
+                                "upper": {
+                                    "value": 17.5,
+                                    "inclusive": true
+                                }
+                            },
+                            "migrate": {
+                                "upper": {
+                                    "value": 17.5,
+                                    "inclusive": true
+                                }
+                            }
                         }
                     }
                 }
@@ -233,8 +296,18 @@
                     "DO_mg_per_l": {
                         "units": "mg/l",
                         "thresholds": {
-                            "outfall": "< 6 mg/l",
-                            "creek": "< 10.0 mg/l"
+                            "outfall": {
+                                "lower": {
+                                    "value": 6,
+                                    "inclusive": true
+                                }
+                            },
+                            "creek": {
+                                "lower": {
+                                    "value": 10.0,
+                                    "inclusive": true
+                                }
+                            }
                         }
                     },
                     "flow": {
@@ -255,8 +328,26 @@
                     "pH": {
                         "units": "pH",
                         "thresholds": {
-                            "outfall": "< 5 or > 9",
-                            "creek": "< 6.5 or > 8.5"
+                            "outfall": {
+                                "lower": {
+                                    "value": 5,
+                                    "inclusive": true
+                                },
+                                "upper": {
+                                    "value": 9,
+                                    "inclusive": true
+                                }
+                            },
+                            "creek": {
+                                "lower": {
+                                    "value": 6.5,
+                                    "inclusive": true
+                                },
+                                "upper": {
+                                    "value": 8.5,
+                                    "inclusive": true
+                                }
+                            }
                         }
                     },
                     "salinity_ppt": {
@@ -265,8 +356,18 @@
                     "SPS micro_S_per_cm": {
                         "units": "microS/cm",
                         "thresholds": {
-                            "outfall": "> 500 microS/cm",
-                            "creek": "> 500 microS/cm"
+                            "outfall": {
+                                "upper": {
+                                    "value": 500,
+                                    "inclusive": true
+                                }
+                            },
+                            "creek": {
+                                "upper": {
+                                    "value": 500,
+                                    "inclusive": true
+                                }
+                            }
                         }
                     },
                     "visual": {
@@ -281,12 +382,37 @@
                     "water_temp": {
                         "units": "celsius",
                         "thresholds": {
-                            "outfall": "> air_temp",
+                            "outfall": {
+                                "upper": {
+                                    "reference_value": "air_temp",
+                                    "inclusive": true
+                                }
+                            },
                             "creek": {
-                                "habitat": "> 16 C",
-                                "spawn": "> 17.5 C",
-                                "rear": "> 17.5 C",
-                                "migrate": "> 17.5 C"
+                                "habitat": {
+                                    "upper": {
+                                        "value": 16,
+                                        "inclusive": true
+                                    }
+                                },
+                                "spawn": {
+                                    "upper": {
+                                        "value": 17.5,
+                                        "inclusive": true
+                                    }
+                                },
+                                "rear": {
+                                    "upper": {
+                                        "value": 17.5,
+                                        "inclusive": true
+                                    }
+                                },
+                                "migrate": {
+                                    "upper": {
+                                        "value": 17.5,
+                                        "inclusive": true
+                                    }
+                                }
                             }
                         }
                     }
