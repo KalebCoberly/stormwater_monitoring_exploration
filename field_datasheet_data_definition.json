@@ -140,7 +140,7 @@
                     "options": ["T", "M", "H"]
                 },
                 "flow_compared_to_expected": {
-                    "options": ["lower", "normal", "higher"]
+                    "options": ["Lower", "Normal", "Higher"]
                 },
                 "odor": {
                     "rank": {
@@ -327,7 +327,7 @@
                         "options": ["T", "M", "H"]
                     },
                     "flow_compared_to_expected": {
-                        "options": ["lower", "normal", "higher"]
+                        "options": ["Lower", "Normal", "Higher"]
                     },
                     "odor": {
                         "rank": {
@@ -465,7 +465,7 @@
                             "dry_outfall": false,
                             "arrival_time": "14:41",
                             "flow": "M",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": 21.0,
                             "water_temp": 11.6,
                             "DO_mg_per_l": 10.35,
@@ -491,7 +491,7 @@
                             "dry_outfall": false,
                             "arrival_time": "14:41",
                             "flow": "M",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": 21.0,
                             "water_temp": 11.2,
                             "DO_mg_per_l": 10.41,
@@ -517,7 +517,7 @@
                             "dry_outfall": false,
                             "arrival_time": "15:09",
                             "flow": "M",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": 22.0,
                             "water_temp": 11.1,
                             "DO_mg_per_l": 10.73,
@@ -570,7 +570,7 @@
                             "dry_outfall": false,
                             "arrival_time": "17:10",
                             "flow": "H",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": 16,
                             "water_temp": 11.6,
                             "DO_mg_per_l": 102.1,
@@ -596,7 +596,7 @@
                             "dry_outfall": false,
                             "arrival_time": "17:33",
                             "flow": "H",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": 18,
                             "water_temp": 11.4,
                             "DO_mg_per_l": 11.03,
@@ -622,7 +622,7 @@
                             "dry_outfall": false,
                             "arrival_time": "17:40",
                             "flow": "H",
-                            "flow_compared_to_expected": "normal",
+                            "flow_compared_to_expected": "Normal",
                             "air_temp": null,
                             "water_temp": 11.4,
                             "DO_mg_per_l": 11.17,
