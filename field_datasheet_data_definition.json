@@ -66,7 +66,7 @@
         },
         "form_type": {
             "options": [
-                "lab_datasheet_stormwater_monitoring_friends_of_salish_sea"
+                "field_datasheet_stormwater_monitoring_friends_of_salish_sea"
             ]
         },
         "investigators": {
@@ -256,7 +256,7 @@
             "form_id": "str",
             "form_type": {
                 "options": [
-                    "lab_datasheet_stormwater_monitoring_friends_of_salish_sea"
+                    "field_datasheet_stormwater_monitoring_friends_of_salish_sea"
                 ]
             },
             "form_version": "str",
@@ -436,7 +436,7 @@
         },
         "forms": {
             "IMG_9527.jpg": {
-                "form_type": "lab_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_type": "field_datasheet_stormwater_monitoring_friends_of_salish_sea",
                 "form_version": "4.4-1-29-2025",
                 "city": "BELLINGHAM",
                 "date": "2025-04-17",
@@ -545,7 +545,7 @@
                 }
             },
             "sheet1.jpg": {
-                "form_type": "lab_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_type": "field_datasheet_stormwater_monitoring_friends_of_salish_sea",
                 "form_version": "4.4-1-29-2025",
                 "city": "BELLINGHAM",
                 "date": "2025-04-21",
