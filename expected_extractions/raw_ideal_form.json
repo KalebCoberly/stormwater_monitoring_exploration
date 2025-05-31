@@ -1,0 +1,120 @@
+{
+    "dev_notes": [
+        "Just doing raw extraction for now, no transformations or validations (e.g., no date parsing)"
+    ],
+    "forms": {
+        "ideal_form.jpg": {
+            "form_type": "field_datasheet_stormwater_monitoring_friends_of_salish_sea",
+            "form_version": "4.4",
+            "city": "BELLINGHAM",
+            "date": "2025-5-30",
+            "investigators": {
+                "KALEB C": {
+                    "start_time": "14:02",
+                    "end_time": "15:07"
+                },
+                "KRIS K": {
+                    "start_time": "14:02",
+                    "end_time": "15:04"
+                },
+                "GIL L": {
+                    "start_time": "14:23",
+                    "end_time": "15:20"
+                }
+            },
+            "notes": "C ST: Microbrial mat retreated.\n\nBROAD: Microbrial mat same position.",
+            "observations": {
+                "field": {
+                    "tide_height": -0.4,
+                    "tide_time": "14:02",
+                    "past_24hr_rainfall": 0.0,
+                    "weather": "cloud_clear"
+                },
+                "site": [
+                    {
+                        "site_id": "C ST",
+                        "dry_outfall": false,
+                        "arrival_time": "14:03",
+                        "flow": "T",
+                        "flow_compared_to_expected": "Higher",
+                        "air_temp": 21.0,
+                        "water_temp": 11.6,
+                        "DO_mg_per_l": 10.35,
+                        "SPS micro_S_per_cm": 414.1,
+                        "salinity_ppt": 0.2,
+                        "pH": 5.91,
+                        "color": {
+                            "rank": 3,
+                            "description": "YELLOW"
+                        },
+                        "odor": {
+                            "rank": 0,
+                            "description": "SULPHUR"
+                        },
+                        "visual": {
+                            "rank": 1,
+                            "description": "FOAM"
+                        },
+                        "bacteria_bottle_no": "B1"
+                    },
+                    {
+                        "site_id": "C ST",
+                        "dry_outfall": false,
+                        "arrival_time": "14:02",
+                        "flow": "M",
+                        "flow_compared_to_expected": "Normal",
+                        "air_temp": 21.0,
+                        "water_temp": 11.2,
+                        "DO_mg_per_l": 10.41,
+                        "SPS micro_S_per_cm": 369.9,
+                        "salinity_ppt": 0.18,
+                        "pH": 5.5,
+                        "color": {
+                            "rank": 2,
+                            "description": "BROWN"
+                        },
+                        "odor": {
+                            "rank": 3,
+                            "description": "FOSSIL"
+                        },
+                        "visual": {
+                            "rank": 2,
+                            "description": "SHEEN"
+                        },
+                        "bacteria_bottle_no": "B2"
+                    },
+                    {
+                        "site_id": "BROAD",
+                        "dry_outfall": false,
+                        "arrival_time": "15:01",
+                        "flow": "H",
+                        "flow_compared_to_expected": "Lower",
+                        "air_temp": 22.0,
+                        "water_temp": 11.1,
+                        "DO_mg_per_l": 10.73,
+                        "SPS micro_S_per_cm": 314.1,
+                        "salinity_ppt": 0.15,
+                        "pH": 7.40,
+                        "color": {
+                            "rank": 1,
+                            "description": "RED"
+                        },
+                        "odor": {
+                            "rank": 2,
+                            "description": "SEWER"
+                        },
+                        "visual": {
+                            "rank": 2,
+                            "description": "FLOATERS"
+                        },
+                        "bacteria_bottle_no": "B3"
+                    },
+                    {
+                        "site_id": "F ST",
+                        "dry_outfall": true
+                    }
+                ]
+            }
+        }
+    }
+}
