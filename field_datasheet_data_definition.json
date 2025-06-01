@@ -3,10 +3,13 @@
         "For pre-DB validation, will need to consult target DB for nullability and other constraints (uniqueness, character limits, etc.).",
         "Should decide whether and how to differentiate null types, like empty fields vs. user-entered nulls (e.g., 'N/A', 'none', null sign), vs. 0.",
         "See also dev_notes/notes fields in metadata section, like for the weather field.",
-        "The example doc has the metadata block included. It's just a copy of the metadata block in the data dictionary, so we could just leave it out of the extraction docs themselves. The advantage of doing that would be saving a little space, as well as avoiding some types of unintentional data anomalies in the case of accidental changes to the metadata. But, I chose to include metadata as part of the actual extraction document as a confirmation of provenance. This allows us to more easily handle anomalies should they arise, such as in the outside chance that we intentionally change the form (change thresholds, etc.) or the data dictionary itself. Without the metadata included with each raw extraction, in order to maintain tight provenance, we'd need to add version numbers to the metadata and put those in each extraction instead -- which is totally doable. Another advantage of including the metadata with the extraction document is for easier processing when programming or simply reading by a human. It also may prove useful if we take on other forms. Anyway, I'm open to using a metadata versioning system instead to save a little space. Or, we might want to include both a copy of the metadata and a metadata version in the extraction documents."
+        "The example doc has the metadata block included. It's just a copy of the metadata block in the data dictionary, so we could just leave it out of the extraction docs themselves. The advantage of doing that would be saving a little space, as well as avoiding some types of unintentional data anomalies in the case of accidental changes to the metadata. But, I chose to include metadata as part of the actual extraction document as a confirmation of provenance. This allows us to more easily handle anomalies should they arise, such as in the outside chance that we intentionally change the form (change thresholds, etc.) or the data dictionary itself. Without the metadata included with each raw extraction, in order to maintain tight provenance, we'd need to add version numbers to the metadata and put those in each extraction instead -- which is totally doable. Another advantage of including the metadata with the extraction document is for easier processing when programming or simply reading by a human. It also may prove useful if we take on other forms. Anyway, I'm open to using a metadata versioning system instead to save a little space. Or, we might want to include both a copy of the metadata and a metadata version in the extraction documents.",
+        "CAVEAT TO ABOVE: I just noticed a version number in the title of the downloadable empty form, so we could easily use that without having to build out our own form versioning system. I'll leave the metadata block as part of the extraction for now as a sanity check, but add the form version number field."
     ],
     "forms": {
-        "str": {
+        "form_id": {
+            "form_type": "str",
+            "form_version": "str",
             "city": "str",
             "date": "str",
             "investigators": {
@@ -59,12 +62,11 @@
             "format": "YYYY-MM-DD"
         },
         "form_id": {
-            "note": "Different than DB's form ID, and won't likely be entered into DB, and is not found on the forms themselves. Just for convenience and to avoid trouble with accidentally sorted lists. Maybe use image filename and/or timestamp."
+            "note": "Unique identifier of completed form. Different than DB's form ID if it exists, and won't likely be entered into DB, and is not found on the forms themselves. Just for convenience and to avoid trouble with accidentally sorted lists. Maybe use image filename and/or timestamp."
         },
         "form_type": {
-            "data_type": "str",
             "options": [
-                "lab_datasheet_stormwater_monitoring_friends_of_salish_sea"
+                "field_datasheet_stormwater_monitoring_friends_of_salish_sea"
             ]
         },
         "investigators": {
@@ -253,11 +255,11 @@
             },
             "form_id": "str",
             "form_type": {
-                "data_type": "str",
                 "options": [
-                    "lab_datasheet_stormwater_monitoring_friends_of_salish_sea"
+                    "field_datasheet_stormwater_monitoring_friends_of_salish_sea"
                 ]
             },
+            "form_version": "str",
             "investigators": {
                 "name": "str",
                 "end_time": {
@@ -434,7 +436,8 @@
         },
         "forms": {
             "IMG_9527.jpg": {
-                "form_type": "lab_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_type": "field_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_version": "4.4-1-29-2025",
                 "city": "BELLINGHAM",
                 "date": "2025-04-17",
                 "investigators": {
@@ -542,7 +545,8 @@
                 }
             },
             "sheet1.jpg": {
-                "form_type": "lab_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_type": "field_datasheet_stormwater_monitoring_friends_of_salish_sea",
+                "form_version": "4.4-1-29-2025",
                 "city": "BELLINGHAM",
                 "date": "2025-04-21",
                 "investigators": {
