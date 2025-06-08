@@ -1,6 +1,6 @@
 # stormwater_monitoring_exploration
 
-Trying out extractions from field data form images for [Cascade STEAM](https://cascadesteam.org) Citizen Science group, for [RE Sources](https://www.re-sources.org) stormwater management project. This is a collaboration between me (@KalebCoberly) and Kris Keillor (@kriskeillor).
+Trying out extractions from field data form images for [Cascade STEAM](https://cascadesteam.org) Citizen Science group, for [RE Sources](https://www.re-sources.org) stormwater management project. This is a collaboration between Kris Keillor (@kriskeillor) and me (@KalebCoberly).
 
 We'll wrap up a prototype walkthrough in an notebook called `extraction.ipynb`. We're using `exploration.ipynb` to try different approaches, with other notebooks to try pieces of it in parallel without making messy merges.
 
