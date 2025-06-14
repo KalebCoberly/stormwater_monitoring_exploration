@@ -15,16 +15,18 @@ SCANNED_DPI = 600
 
 def main() -> None:
     # Build template.
+    template_doc = fitz.open(TEMPLATE_PATH)
+    template_page = template_doc[0]
 
     ## Rasterize template PDF to image.
-    template_gray = rasterize_PDF_to_image(pdf_path=TEMPLATE_PATH, dpi=TEMPLATE_DPI)
+    template_gray = rasterize_PDF_to_image(page=template_page, dpi=TEMPLATE_DPI)
     window = cv2.namedWindow("Template Gray", cv2.WINDOW_NORMAL)
     cv2.imshow("Template Gray", template_gray)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
     ## Get template fiducial points.
-    # TODO
+    template_fiducial_points = get_fiducial_points(img=template_gray)
 
     ## Get template ROI coordinates.
     widgets = template_page.widgets()
@@ -40,18 +42,20 @@ def main() -> None:
     pp(ROIs)
 
     # Align input image to template.
+    input_doc = fitz.open(SCANNED_PDF_PATH)
+    input_page = input_doc[0]
 
-    ## Rasterize scanned PDG to image.
-    input_img_gray = rasterize_PDF_to_image(pdf_path=SCANNED_PDF_PATH, dpi=SCANNED_DPI)
+    ## Rasterize scanned PDF to image.
+    input_img_gray = rasterize_PDF_to_image(page=input_page, dpi=SCANNED_DPI)
     window = cv2.namedWindow("Input Image Gray", cv2.WINDOW_NORMAL)
     cv2.imshow("Input Image Gray", input_img_gray)
     cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    cv2.destroyWindow(window)
 
     ## Warp image to template.
-    input_img_corners = get_image_corners(img=input_img_gray)
+    inpiut_img_fiducial_points = get_fiducial_points(img=input_img_gray)
 
-    M = cv2.getPerspectiveTransform(src=input_img_corners, dst=template_corners)
+    M = cv2.getPerspectiveTransform(src=inpiut_img_fiducial_points, dst=template_fiducial_points)
     input_img_warped = cv2.warpPerspective(
         src=input_img_gray,
         M=M,
@@ -88,12 +92,9 @@ def main() -> None:
 
 
 def rasterize_PDF_to_image(
-    pdf_path: str,
+    page: fitz.Page,
     dpi: int
 ) -> cv2.Mat | np.ndarray[Any, np.dtype[np.integer[Any] | np.floating[Any]]]:
-    doc = fitz.open(pdf_path)
-    page = doc[0]
-
     scale = dpi / 72  # PDF “points” are 1/72 inch
     mat  = fitz.Matrix(scale, scale)
     pix = page.get_pixmap(matrix=mat)
@@ -104,6 +105,50 @@ def rasterize_PDF_to_image(
     img_gray = cv2.cvtColor(img_arr, cv2.COLOR_RGB2GRAY)
 
     return img_gray
+
+
+def get_fiducial_points(
+    img: cv2.Mat | np.ndarray[Any, np.dtype[np.integer[Any] | np.floating[Any]]]
+) -> np.ndarray[tuple[int, int], np.dtype[np.float32]]:
+    """Detect three fiducial points in the image."""
+    _, img_thresh = cv2.threshold(img, 200, 255, cv2.THRESH_BINARY_INV)
+    img_thresh = cv2.medianBlur(img_thresh, 3)
+    contours, _ = cv2.findContours(img_thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    print(f"Image shape: {img.shape}")
+
+    border_corners = []
+    for contour in contours:
+        peri   = cv2.arcLength(contour, True)
+        approx = cv2.approxPolyDP(contour, 0.02 * peri, True)
+        if len(approx) == 4:
+            x, y, w, h = cv2.boundingRect(approx)
+            area = w * h
+            print(f"area: {area}")
+            # Adjust these area thresholds to match the printed mark size at 300 DPI
+            # if 500 < area < 5000:
+            print(f"x: {x}, y: {y}, w: {w}, h: {h}, area: {area}")
+            print (f"w/h: {w/h}")
+            # if 0.8 < w/h < 1.2:
+            M = cv2.moments(approx)
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            breakpoint()
+            border_corners.append([cx, cy])
+
+    print(border_corners)
+
+    if len(border_corners) != 4:
+        raise RuntimeError(f"Expected 4 fiducials in the blank template, found {len(border_corners)}")
+
+    fiducial_points = np.array([
+        [0, 0],          # Top-left
+        # [w - 1, 0],     # Top-right
+        [w - 1, h - 1], # Bottom-right
+        [0, h - 1]      # Bottom-left
+    ], dtype=np.float32)
+
+    return fiducial_points
 
 
 def convert_fitz_rect_to_pixel_rect(
